@@ -1,5 +1,5 @@
 ## tabtree - Parsing tabbed tree formatted text files into dict node trees
-[![Build Status](https://travis-ci.org/fran-ovia/tabtree.png?branch=master)](https://travis-ci.org/fran-ovia/tabtree)
+[![Build Status](https://travis-ci.org/fran-ovia/tabtree-py.svg?branch=master)](https://travis-ci.org/fran-ovia/tabtree-py)
 [![PyPI](http://img.shields.io/pypi/v/tabtree.svg)](https://pypi.python.org/pypi/tabtree)
 
 1. tabtree is a tiny package to convert tabbed trees from text files into dict trees.
