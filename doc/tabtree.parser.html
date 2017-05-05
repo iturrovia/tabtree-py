@@ -1,0 +1,77 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module tabtree.parser</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="tabtree.html"><font color="#ffffff">tabtree</font></a>.parser</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:///E:/portablegit/github.com/fran-ovia/tabtree-py/tabtree/parser.py">e:\portablegit\github.com\fran-ovia\tabtree-py\tabtree\parser.py</a></font></td></tr></table>
+    <p><tt>The&nbsp;purpose&nbsp;of&nbsp;this&nbsp;module&nbsp;is&nbsp;to&nbsp;parse&nbsp;data&nbsp;formatted&nbsp;as&nbsp;tabbed&nbsp;tree</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-dts_to_node_trees"><strong>dts_to_node_trees</strong></a>(dts, text_to_node<font color="#909090">=&lt;function text_to_dc_node&gt;</font>, node_children_key<font color="#909090">='children'</font>)</dt><dd><tt>Takes&nbsp;a&nbsp;stream&nbsp;of&nbsp;(depth,&nbsp;text)&nbsp;tuples&nbsp;and&nbsp;yields&nbsp;a&nbsp;stream&nbsp;of&nbsp;node&nbsp;trees,&nbsp;which&nbsp;are&nbsp;trees&nbsp;composed&nbsp;of&nbsp;dictionary&nbsp;nodes<br>
+&nbsp;<br>
+It&nbsp;can&nbsp;also&nbsp;take&nbsp;the&nbsp;following&nbsp;optional&nbsp;parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;text_to_node:&nbsp;function&nbsp;that&nbsp;takes&nbsp;the&nbsp;text&nbsp;from&nbsp;the&nbsp;input&nbsp;(depth,&nbsp;text)&nbsp;tuple&nbsp;and&nbsp;returns&nbsp;a&nbsp;node,&nbsp;which&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;that&nbsp;contains,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;other&nbsp;fields,&nbsp;a&nbsp;"children"&nbsp;field&nbsp;set&nbsp;to&nbsp;an&nbsp;empty&nbsp;list&nbsp;(which&nbsp;will&nbsp;be&nbsp;filled&nbsp;later&nbsp;on).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;it&nbsp;takes&nbsp;the&nbsp;text_to_dc_node&nbsp;function&nbsp;from&nbsp;this&nbsp;module&nbsp;as&nbsp;a&nbsp;default&nbsp;value,&nbsp;but&nbsp;you&nbsp;can&nbsp;provide&nbsp;your&nbsp;own&nbsp;text_to_node<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;if&nbsp;necessary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;node_children_key:&nbsp;in&nbsp;case&nbsp;you&nbsp;provide&nbsp;a&nbsp;custom&nbsp;text_to_node&nbsp;function&nbsp;that,&nbsp;when&nbsp;creating&nbsp;the&nbsp;children&nbsp;field&nbsp;in&nbsp;the&nbsp;outpput&nbsp;dictionary,&nbsp;uses<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;key&nbsp;value&nbsp;different&nbsp;from&nbsp;"children",&nbsp;then&nbsp;you&nbsp;mmus&nbsp;specify&nbsp;such&nbsp;new&nbsp;key&nbsp;value&nbsp;in&nbsp;node_children_key,&nbsp;so&nbsp;the&nbsp;dts_to_node_trees&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;will&nbsp;now&nbsp;know&nbsp;where&nbsp;to&nbsp;add&nbsp;children&nbsp;elements&nbsp;into&nbsp;your&nbsp;dictionary</tt></dd></dl>
+ <dl><dt><a name="-line_to_depth_and_text"><strong>line_to_depth_and_text</strong></a>(line)</dt><dd><tt>Takes&nbsp;a&nbsp;line&nbsp;and&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;containing:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;number&nbsp;of&nbsp;tabs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;data&nbsp;after&nbsp;those&nbsp;tabs</tt></dd></dl>
+ <dl><dt><a name="-lines_to_dts"><strong>lines_to_dts</strong></a>(lines)</dt><dd><tt>Takes&nbsp;a&nbsp;stream&nbsp;of&nbsp;lines&nbsp;and&nbsp;yields,&nbsp;for&nbsp;each&nbsp;line,&nbsp;a&nbsp;(depth,&nbsp;text)&nbsp;tuple&nbsp;containing:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;depth&nbsp;(number&nbsp;of&nbsp;tabs)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;text&nbsp;found&nbsp;after&nbsp;the&nbsp;tabs</tt></dd></dl>
+ <dl><dt><a name="-lines_to_node_trees"><strong>lines_to_node_trees</strong></a>(lines, text_to_node<font color="#909090">=&lt;function text_to_dc_node&gt;</font>, node_children_key<font color="#909090">='children'</font>, spaces_per_tab<font color="#909090">=None</font>)</dt><dd><tt>Takes&nbsp;a&nbsp;stream&nbsp;of&nbsp;lines&nbsp;and&nbsp;yields&nbsp;a&nbsp;stream&nbsp;of&nbsp;node&nbsp;trees,&nbsp;which&nbsp;are&nbsp;trees&nbsp;composed&nbsp;of&nbsp;dictionary&nbsp;nodes<br>
+&nbsp;<br>
+It&nbsp;can&nbsp;also&nbsp;take&nbsp;the&nbsp;following&nbsp;optional&nbsp;parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;text_to_node:&nbsp;function&nbsp;that&nbsp;takes&nbsp;the&nbsp;text&nbsp;from&nbsp;the&nbsp;input&nbsp;(depth,&nbsp;text)&nbsp;tuple&nbsp;and&nbsp;returns&nbsp;a&nbsp;node,&nbsp;which&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;that&nbsp;contains,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;other&nbsp;fields,&nbsp;a&nbsp;"children"&nbsp;field&nbsp;set&nbsp;to&nbsp;an&nbsp;empty&nbsp;list&nbsp;(which&nbsp;will&nbsp;be&nbsp;filled&nbsp;later&nbsp;on).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;that&nbsp;it&nbsp;takes&nbsp;the&nbsp;text_to_dc_node&nbsp;function&nbsp;from&nbsp;this&nbsp;module&nbsp;as&nbsp;a&nbsp;default&nbsp;value,&nbsp;but&nbsp;you&nbsp;can&nbsp;provide&nbsp;your&nbsp;own&nbsp;text_to_node<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;if&nbsp;necessary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;node_children_key:&nbsp;in&nbsp;case&nbsp;you&nbsp;provide&nbsp;a&nbsp;custom&nbsp;text_to_node&nbsp;function&nbsp;that,&nbsp;when&nbsp;creating&nbsp;the&nbsp;children&nbsp;field&nbsp;in&nbsp;the&nbsp;outpput&nbsp;dictionary,&nbsp;uses<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;key&nbsp;value&nbsp;different&nbsp;from&nbsp;"children",&nbsp;then&nbsp;you&nbsp;mmus&nbsp;specify&nbsp;such&nbsp;new&nbsp;key&nbsp;value&nbsp;in&nbsp;node_children_key,&nbsp;so&nbsp;the&nbsp;dts_to_node_trees&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;will&nbsp;now&nbsp;know&nbsp;where&nbsp;to&nbsp;add&nbsp;children&nbsp;elements&nbsp;into&nbsp;your&nbsp;dictionary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;spaces_per_tab:&nbsp;in&nbsp;case&nbsp;the&nbsp;indent&nbsp;in&nbsp;the&nbsp;input&nbsp;lines&nbsp;combines&nbsp;both&nbsp;tabs&nbsp;and&nbsp;spaces,&nbsp;in&nbsp;which&nbsp;case&nbsp;you&nbsp;might&nbsp;want&nbsp;to&nbsp;set&nbsp;and&nbsp;equivalence&nbsp;other<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;one&nbsp;to&nbsp;one</tt></dd></dl>
+ <dl><dt><a name="-spaces_to_tabs"><strong>spaces_to_tabs</strong></a>(line, spaces_per_tab)</dt><dd><tt>Replaces&nbsp;leading&nbsp;spaces&nbsp;with&nbsp;tabs,&nbsp;according&nbsp;to&nbsp;the&nbsp;spaces_per_tab&nbsp;equivalence<br>
+&nbsp;<br>
+:param&nbsp;string&nbsp;line:&nbsp;input&nbsp;line<br>
+:rtype:&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-text_to_dc_node"><strong>text_to_dc_node</strong></a>(text)</dt><dd><tt>Takes&nbsp;a&nbsp;text&nbsp;string&nbsp;and&nbsp;returns&nbsp;a&nbsp;DC&nbsp;(Data&nbsp;and&nbsp;Children)&nbsp;node,&nbsp;which&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;contaning&nbsp;the&nbsp;following&nbsp;elements:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;data:&nbsp;data&nbsp;extracted&nbsp;from&nbsp;the&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;children:&nbsp;list&nbsp;of&nbsp;children&nbsp;nodes,&nbsp;not&nbsp;extracted&nbsp;from&nbsp;the&nbsp;input&nbsp;text,&nbsp;but&nbsp;to&nbsp;be&nbsp;filled&nbsp;with&nbsp;subsquent&nbsp;nodes<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;is&nbsp;an&nbsp;example&nbsp;of&nbsp;a&nbsp;"text_to_node"&nbsp;function&nbsp;that&nbsp;could&nbsp;be&nbsp;used&nbsp;with&nbsp;<a href="#-dts_to_node_trees">dts_to_node_trees</a>()</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>GENERAL_TABBED_LINE_REGEX</strong> = &lt;_sre.SRE_Pattern object&gt;<br>
+<strong>SPACE_TABBED_LINE_REGEX</strong> = &lt;_sre.SRE_Pattern object&gt;</td></tr></table>
+</body></html>
