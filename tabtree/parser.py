@@ -26,7 +26,7 @@ def line_to_depth_and_text(line):
 	'''
 	Takes a line and returns a tuple containing:
 	    - The number of tabs
-	    - The data after those tabs
+	    - The text after those tabs
 	'''
 	m = GENERAL_TABBED_LINE_REGEX.match(line)
 	depth = len(m.group(1))
@@ -69,7 +69,9 @@ def dts_to_node_trees(dts, text_to_node=text_to_dc_node, node_children_key='chil
 	depth_to_level = {}
 	max_depth = -1
 	min_depth = -1
-	for (depth, data) in itertools.ifilter(lambda (depth, data): data != '', dts):
+	for depth_and_text in itertools.ifilter(lambda depth_and_text): depth_and_text[1] != '', dts):
+		depth = depth_and_text[0]
+		text = depth_and_text[1]
 		if(depth <= min_depth):
 			node = node_stack[0]
 			node_stack = []
@@ -78,18 +80,18 @@ def dts_to_node_trees(dts, text_to_node=text_to_dc_node, node_children_key='chil
 			min_depth = -1
 			yield node
 		if(len(node_stack) == 0):
-			if(data != ''):
+			if(text != ''):
 				# Initializing the stack
 				depth_to_level[depth] = 0
 				max_depth = depth
 				min_depth = depth
-				node = text_to_node(data)
+				node = text_to_node(text)
 				node_stack.append(node)
 			else:
 				print('once')
 		else:
 			if(depth > max_depth):
-				node = text_to_node(data)
+				node = text_to_node(text)
 				# New node, we append it as children to the last one
 				node_stack[depth_to_level[max_depth]][node_children_key].append(node)
 				# Now appending the new node to the stack
@@ -97,7 +99,7 @@ def dts_to_node_trees(dts, text_to_node=text_to_dc_node, node_children_key='chil
 				max_depth = depth
 				node_stack.append(node)
 			else:
-				node = text_to_node(data)
+				node = text_to_node(text)
 				# Children of someone
 				level = depth_to_level[depth]
 				node_stack = node_stack[:level]
