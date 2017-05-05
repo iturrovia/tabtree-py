@@ -69,7 +69,7 @@ def dts_to_node_trees(dts, text_to_node=text_to_dc_node, node_children_key='chil
 	depth_to_level = {}
 	max_depth = -1
 	min_depth = -1
-	for depth_and_text in itertools.ifilter(lambda depth_and_text): depth_and_text[1] != '', dts):
+	for depth_and_text in itertools.ifilter(lambda depth_and_text: depth_and_text[1] != '', dts):
 		depth = depth_and_text[0]
 		text = depth_and_text[1]
 		if(depth <= min_depth):
