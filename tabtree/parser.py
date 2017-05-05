@@ -3,9 +3,19 @@ The purpose of this module is to parse data formatted as tabbed tree
 
 """
 
+import sys
 import re
 import string
 import itertools
+
+# Making portable functions to support both Python 2 and Python 3
+if sys.version_info >= (3,0,0):
+	p_map = map
+	p_filter = filter
+else:
+	p_map = itertools.imap
+	p_filter = itertools.ifilter
+
 GENERAL_TABBED_LINE_REGEX = re.compile('([\\t ]*)(.*)')
 SPACE_TABBED_LINE_REGEX = re.compile('( *)(.*)')
 
@@ -19,7 +29,7 @@ def spaces_to_tabs(line, spaces_per_tab):
 	'''
 	m = GENERAL_TABBED_LINE_REGEX.match(line)
 	space_tab = ' '*spaces_per_tab
-	return string.replace(m.group(1), space_tab, '\t') + m.group(2)
+	return m.group(1).replace(space_tab, '\t') + m.group(2)
 
 
 def line_to_depth_and_text(line):
@@ -40,7 +50,7 @@ def lines_to_dts(lines):
 	    - The text found after the tabs
 	
 	'''
-	return itertools.imap(line_to_depth_and_text, lines)
+	return p_map(line_to_depth_and_text, lines)
 
 def text_to_dc_node(text):
 	'''
@@ -69,7 +79,7 @@ def dts_to_node_trees(dts, text_to_node=text_to_dc_node, node_children_key='chil
 	depth_to_level = {}
 	max_depth = -1
 	min_depth = -1
-	for depth_and_text in itertools.ifilter(lambda depth_and_text: depth_and_text[1] != '', dts):
+	for depth_and_text in p_filter(lambda depth_and_text: depth_and_text[1] != '', dts):
 		depth = depth_and_text[0]
 		text = depth_and_text[1]
 		if(depth <= min_depth):
@@ -133,8 +143,8 @@ def lines_to_node_trees(lines, text_to_node=text_to_dc_node, node_children_key='
 	min_depth = -1
 	if(spaces_per_tab != None):
 		fix_spaces = lambda x: spaces_to_tabs(x, spaces_per_tab)
-		preprocessed_lines = itertools.imap(fix_spaces, lines)
+		preprocessed_lines = p_map(fix_spaces, lines)
 	else:
 		preprocessed_lines = lines
-	dts = itertools.imap(line_to_depth_and_text, preprocessed_lines)
+	dts = p_map(line_to_depth_and_text, preprocessed_lines)
 	return dts_to_node_trees(dts, text_to_node=text_to_node, node_children_key=node_children_key)
