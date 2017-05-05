@@ -57,6 +57,6 @@ will print the following two trees:
 
 ## Why implementing this module?
 
-Although this is actually a tiny piece of code, it is a functionality I need quite often. However, I found very few existing python implementations of it (mostly code snippets), and none of which was entirely suitable for my needs:
+Although this is actually a tiny piece of code, it is a functionality I need quite often. However, I found very few existing python implementations of it (mostly code snippets), and none of them was entirely suitable for my needs:
    * Lazy evaluation (I am working with very big files, so I cannot afford to load all the data into a big tree in memory).
    * Ability to use customized node formats. I'm parsing different types of data that require different representations, so customizing the node format at tree creation time is a big plus (otherwise you need to stick with one-and-only-library-defined-node-class or either apply a traverse-the-trees-and-transform-node process)
